@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    
+    <link rel="manifest" href="./manifest.json">
+    
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{{ url_for('static', filename='index.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='App.css') }}" rel="stylesheet">
+</head>
+<body>
+    <article>
+        {% block content %}{% endblock %}
+        <footer>
+            <span><a href="https://github.com/blineberry/covid-py">View on GitHub.</a></span> 
+            <span>Made by <a href="https://orangegnome.com">Brent Lineberry</a>.</span>
+        </footer>
+    </article>
+</body>
+</html>

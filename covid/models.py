@@ -15,6 +15,7 @@ class State(db.Model):
     name = db.Column(db.String(26))
     fips = db.Column(db.CHAR(2))
 
+
 class StateDatum(db.Model):
     __tablename__ = 'state_data'
     id = db.Column(db.BigInteger, primary_key=True)
@@ -32,7 +33,7 @@ class County(db.Model):
     name = db.Column(db.String(26))
     fips = db.Column(db.CHAR(5))
     state_id = db.Column(db.Integer, db.ForeignKey(State.id))
-    state = db.relationship('State', backref=db.backref('state_data', lazy=True))
+    state = db.relationship('State', backref=db.backref('counties', lazy=True))
 
 class CountyDatum(db.Model):
     __tablename__ = 'county_data'

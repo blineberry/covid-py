@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Select charts{% endblock %}
+
+{% block content %}
+    <form method="POST">
+    <p>
+        <input type="submit" value="View selected charts" />
+    </p>
+    <h2><label><input type="checkbox" name="us" value="1" {% if us_selected > 0 %}checked{% endif %} /> U.S.</label></h2>
+
+    <div class="select-states">
+    {% for state in states %}
+    <div class="select-statelist">
+        <h2>
+        <label><input type="checkbox" name="states" value="{{ state.id }}" {% if state.id in state_selected %}checked{% endif %} /> {{ state.name }}</label>
+        </h2>
+        <p class="select-countylist">
+            {% for county in state.counties|sort(attribute='name') %}
+            <label><input type="checkbox" name="counties" value="{{ county.id }}" {% if county.id in counties_selected %}checked{% endif %} />{{ county.name }}</label><br/>
+            {% endfor %}
+        </p>
+    </div>
+    {% endfor %}
+    </div>
+
+    </form>
+{% endblock %}

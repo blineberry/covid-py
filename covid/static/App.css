@@ -44,6 +44,16 @@
   bottom: 25%;
 }
 
+.select-states {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.select-statelist {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
 .App {
   text-align: center;
 }
