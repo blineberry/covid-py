@@ -1,0 +1,5 @@
+{% for chart in chartset.charts %}
+    {% with chart=chart, max_days=chartset.get_max_days(), max_cases=chartset.get_max_cases() %}
+        {% include 'covid/chart.html' %}
+    {% endwith %}
+{% endfor %}

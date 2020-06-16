@@ -1,0 +1,24 @@
+<section class="covidChart">
+    <h2>{{ chart.name }}</h2>
+    <div class="covidChart-content">
+        {% set data=chart.get_data_subset() %}
+        {% set last_two_weeks=chart.get_last_two_weeks() %}
+        {% set last_two_weeks_offset=data|length %}
+        {% if data|length <= 0 %}
+            <div>Daily cases not above 30</div>
+        {% else %}
+            <div class="covidChart-label covidChart-label-100">{{ max_cases }}</div>
+            <div class="covidChart-label covidChart-label-75">{{ (max_cases * 0.75)|round|int }}</div>
+            <div class="covidChart-label covidChart-label-50">{{ (max_cases * 0.5)|round|int }}</div>
+            <div class="covidChart-label covidChart-label-25">{{ (max_cases * 0.25)|round|int }}</div>
+            <svg viewBox="0 0 300 200" class="chart">
+                <rect x="0" y="0" width="100%" height="100%" fill="{{ chart.get_svg_background() }}"></rect>
+                <line x1="0" y1="75%" x2="100%" y2="75%" stroke="gray" stroke-width="0.5"></line>
+                <line x1="0" y1="50%" x2="100%" y2="50%" stroke="gray" stroke-width="0.5"></line>
+                <line x1="0" y1="25%" x2="100%" y2="25%" stroke="gray" stroke-width="0.5"></line>
+                <polyline fill="none" stroke="#0074d9" stroke-width="1" points="{{ data|svg_points(max_days, max_cases, 300, 200) }}"></polyline>
+                <polyline fill="none" stroke="#0074d9" stroke-width="1" stroke-dasharray="2 4" points="{{ last_two_weeks|svg_points(max_days, max_cases, 300, 200,last_two_weeks_offset) }}"></polyline>
+            </svg>
+        {% endif %}
+    </div>
+</section>
