@@ -110,11 +110,11 @@ def get_states_from_nytimes_data(db):
     for ny_state in ny_states:
         c.execute("""SELECT id FROM states WHERE fips = %s""", (ny_state[1],))
         if c.fetchone() is None:
-            print(format("%s is a new state", ny_state[0]))
+            print("{0} is a new state".format(ny_state[0]))
             try:
                 c.execute("""INSERT INTO states (name, fips)
                 VALUES (%s, %s)""",
-                record[0], record[1])          
+                (ny_state[0], ny_state[1]))          
             except Exception as e: 
                 print(e)
                 sys.exit(2)
